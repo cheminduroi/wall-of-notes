@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { postNote } from "../../axios-util";
 import "./NewNoteForm.css";
 
 const NewNoteForm = (props) => {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+
+  const onNameChange = (e) => setName(e.target.value);
+  const onMessageChange = (e) => setMessage(e.target.value);
+  const onSubmit = async () => {
+    await postNote({ Name: name, Message: message });
+    props.onDone();
+  };
+
   return (
-    <Form>
+    <Form onSubmit={onSubmit}>
       <Form.Group controlId="formName">
         <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="James" />
+        <Form.Control
+          value={name}
+          type="text"
+          placeholder="James"
+          onChange={onNameChange}
+        />
       </Form.Group>
 
       <Form.Group controlId="formMessage">
@@ -15,15 +31,17 @@ const NewNoteForm = (props) => {
         <Form.Control
           as="textarea"
           rows={3}
+          value={message}
+          maxLength="300"
+          onChange={onMessageChange}
           placeholder="I hope anyone who see this has a great day!"
         />
-        <Form.Text className="text-muted text-right">0 / 300</Form.Text>
+        <Form.Text className="text-muted text-right">
+          {message.length} / 300
+        </Form.Text>
       </Form.Group>
       <div className="btn-footer">
-        <Button variant="secondary" onClick={props.onClose}>
-          Close
-        </Button>
-        <Button className="btn-end" variant="primary" type="submit">
+        <Button variant="primary" type="submit">
           Post
         </Button>
       </div>

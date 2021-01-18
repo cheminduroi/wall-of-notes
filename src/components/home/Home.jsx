@@ -10,12 +10,12 @@ const Home = () => {
   const [show, setShow] = useState(false);
   const [notes, setNotes] = useState([]);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const onClose = () => setShow(false);
+  const onShow = () => setShow(true);
 
   useEffect(
     () => (async () => setNotes(await fetchNotes()))(),
-    [],
+    [show],
   );
 
   
@@ -24,7 +24,7 @@ const Home = () => {
     <div id="main">
       <div>
         <span id="title">Wall of Notes</span>
-        <Button className="circular" variant="success" onClick={handleShow}>
+        <Button className="circular" variant="success" onClick={onShow}>
           Add Note&nbsp;&nbsp;+
         </Button>
       </div>
@@ -36,11 +36,11 @@ const Home = () => {
       </Container>
       <br />
 
-      <Modal show={show} onHide={handleClose} centered>
+      <Modal show={show} onHide={onClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>New Note</Modal.Title>
         </Modal.Header>
-        <Modal.Body><NewNoteForm onClose={handleClose}/></Modal.Body>
+        <Modal.Body><NewNoteForm onDone={onClose}/></Modal.Body>
       </Modal>
     </div>
   );
