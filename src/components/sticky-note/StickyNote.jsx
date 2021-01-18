@@ -2,12 +2,12 @@ import React from "react";
 import Col from 'react-bootstrap/Col';
 import "./StickyNote.css";
 
-const StickyNote = () => {
+const StickyNote = (props) => {
   return (
     <Col className="cell">
       <a href="#">
-        <h2>Title #1</h2>
-        <p>Text Content #1</p>
+        <h2>{props.name}</h2>
+        <p>{props.msg}</p>
       </a>
     </Col>
   );

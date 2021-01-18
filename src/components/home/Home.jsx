@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StickyNote from "../sticky-note/StickyNote";
 import NewNoteForm from "../new-note/NewNoteForm";
 import Container from "react-bootstrap/Container";
 import { Row, Button, Modal } from "react-bootstrap";
+import { fetchNotes } from "../../axios-util";
 import "./Home.css";
 
 const Home = () => {
   const [show, setShow] = useState(false);
+  const [notes, setNotes] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(
+    () => (async () => setNotes(await fetchNotes()))(),
+    [],
+  );
+
+  
 
   return (
     <div id="main">
@@ -22,9 +31,7 @@ const Home = () => {
 
       <Container className="cont">
         <Row>
-          {Array.from({ length: 10 }, (_, i) => (
-            <StickyNote />
-          ))}
+          {notes.map((n, idx) => <StickyNote key={idx} msg={n['message']} name={n['name']}/>)}
         </Row>
       </Container>
       <br />
