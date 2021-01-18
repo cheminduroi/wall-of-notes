@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import StickyNote from "../sticky-note/StickyNote";
+import NewNoteForm from "../new-note/NewNoteForm";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Button from "react-bootstrap/Button";
-import BezierCurve from "../bezier-curve/BezierCurve";
+import { Row, Button, Modal } from "react-bootstrap";
 import "./Home.css";
 
 const Home = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
     <div id="main">
       <div>
-      <span id="title">Wall of Notes</span>
-      <Button className="circular" variant="success">
-        Add Note&nbsp;&nbsp;+
-      </Button>
+        <span id="title">Wall of Notes</span>
+        <Button className="circular" variant="success" onClick={handleShow}>
+          Add Note&nbsp;&nbsp;+
+        </Button>
       </div>
-      
+
       <Container className="cont">
         <Row>
           {Array.from({ length: 10 }, (_, i) => (
@@ -24,6 +28,13 @@ const Home = () => {
         </Row>
       </Container>
       <br />
+
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>New Note</Modal.Title>
+        </Modal.Header>
+        <Modal.Body><NewNoteForm onClose={handleClose}/></Modal.Body>
+      </Modal>
     </div>
   );
 };
