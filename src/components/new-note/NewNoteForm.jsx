@@ -23,6 +23,8 @@ const NewNoteForm = (props) => {
           type="text"
           placeholder="James"
           onChange={onNameChange}
+          required
+          maxLength={12}
         />
       </Form.Group>
 
@@ -32,16 +34,17 @@ const NewNoteForm = (props) => {
           as="textarea"
           rows={3}
           value={message}
-          maxLength="300"
           onChange={onMessageChange}
           placeholder="I hope anyone who see this has a great day!"
+          required
+          maxLength={100}
         />
         <Form.Text className="text-muted text-right">
-          {message.length} / 300
+          {message.length} / 100
         </Form.Text>
       </Form.Group>
       <div className="btn-footer">
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" required>
           Post
         </Button>
       </div>

@@ -46,19 +46,4 @@ const Home = () => {
   );
 };
 
-// <div className="home">
-//   <div>
-//     <BezierCurve />
-//     <div id="page-heading">
-//       <h2 id="title">Wall of Notes</h2>
-//       <h4 id="desc">Leave a note of positivity</h4>
-//     </div>
-//     <ul id="note-grid">
-//       {Array.from({ length: 20 }, (_, i) => (
-//         <StickyNote noteKey={i} />
-//       ))}
-//     </ul>
-//   </div>
-// </div>
-
 export default Home;
