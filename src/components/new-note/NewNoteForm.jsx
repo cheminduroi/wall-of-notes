@@ -37,10 +37,10 @@ const NewNoteForm = (props) => {
           onChange={onMessageChange}
           placeholder="I hope anyone who see this has a great day!"
           required
-          maxLength={100}
+          maxLength={70}
         />
         <Form.Text className="text-muted text-right">
-          {message.length} / 100
+          {message.length} / 70
         </Form.Text>
       </Form.Group>
       <div className="btn-footer">
